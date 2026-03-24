@@ -1,0 +1,13 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Build iOS App (xcodebuild)",
+			"type": "shell",
+			"command": "xcodebuild -scheme EquityKombatXcode -destination 'platform=iOS Simulator,name=iPhone 15' build",
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "build"
+		}
+	]
+}

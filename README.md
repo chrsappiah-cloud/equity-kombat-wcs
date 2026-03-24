@@ -95,3 +95,39 @@ To learn more about React Native, take a look at the following resources:
 - [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
 - [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
 - [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+
+# World-Class Monorepo Scaffold
+
+This repository is structured for high-quality, scalable development and production. It uses Yarn workspaces, TypeScript, React Native, React, Node.js, and shared packages.
+
+## Structure
+
+- `apps/`
+  - `mobile/` (React Native, TypeScript)
+  - `web-admin/` (React, TypeScript)
+- `services/`
+  - `api-gateway/`, `auth/`, `circles/`, `locations/`, `geofences/`, `safety/`, `messaging/`, `notifications/`, `billing/`, `compliance/`, `workers/` (Node.js, TypeScript)
+- `packages/`
+  - `ui/` (shared React components, TypeScript)
+  - `types/` (shared TypeScript types)
+  - `config/` (shared config)
+  - `sdk/` (shared SDK, TypeScript)
+
+## Tooling
+- Yarn workspaces
+- TypeScript everywhere
+- ESLint, Prettier, Husky, lint-staged
+- GitHub Actions for CI/CD
+
+## Setup
+1. Install dependencies: `yarn install`
+2. Build all: `yarn build`
+3. Lint all: `yarn lint`
+4. Test all: `yarn test`
+
+## Contributing
+See `CONTRIBUTING.md` for guidelines.
+
+---
+
+This scaffold is ready for rapid development and scaling. Replace placeholders as you build out each app, service, and package.

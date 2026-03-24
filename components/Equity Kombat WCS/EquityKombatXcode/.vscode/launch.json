@@ -1,0 +1,24 @@
+{
+    "configurations": [
+        {
+            "type": "swift",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:EquityKombatXcode}",
+            "name": "Debug EquityKombatXcode",
+            "target": "EquityKombatXcode",
+            "configuration": "debug",
+            "preLaunchTask": "swift: Build Debug EquityKombatXcode"
+        },
+        {
+            "type": "swift",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:EquityKombatXcode}",
+            "name": "Release EquityKombatXcode",
+            "target": "EquityKombatXcode",
+            "configuration": "release",
+            "preLaunchTask": "swift: Build Release EquityKombatXcode"
+        }
+    ]
+}

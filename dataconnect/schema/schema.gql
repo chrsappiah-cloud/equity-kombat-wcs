@@ -1,0 +1,36 @@
+type User @table {
+  displayName: String!
+  createdAt: Timestamp!
+  email: String!
+  photoUrl: String
+  lastLoginAt: Timestamp
+  subscriptionType: SubscriptionType
+}
+
+type VideoPrompt @table {
+  user: User!
+  promptText: String!
+  createdAt: Timestamp!
+  status: String!
+  videoStyle: String
+  voiceoverOption: String
+  theme: String
+}
+
+type GeneratedVideo @table {
+  user: User!
+  videoPrompt: VideoPrompt!
+  videoUrl: String!
+  createdAt: Timestamp!
+  durationSeconds: Int!
+  thumbnailUrl: String
+  sizeBytes: Int64
+}
+
+type SubscriptionType @table {
+  name: String!
+  maxPromptsPerMonth: Int!
+  processingPriority: String!
+  maxVideoDurationSeconds: Int
+  pricePerMonth: Float
+}

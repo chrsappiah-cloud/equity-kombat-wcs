@@ -1,0 +1,2 @@
+expo init EquityKombatCrossPlatform
+cd EquityKombatCrossPlatform
