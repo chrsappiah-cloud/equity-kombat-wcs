@@ -1,0 +1,35 @@
+name: iOS XCTest
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  schedule:
+    - cron: '0 3 * * *' # daily at 3am UTC
+
+jobs:
+  ios-tests:
+    runs-on: macos-latest
+    strategy:
+      matrix:
+        device: ["iPhone 15", "iPhone 15 Pro"]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Ruby (for CocoaPods)
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.1'
+      - name: Install dependencies
+        run: |
+          cd EquityKombatWCS/ios
+          pod install
+      - name: Build and test
+        run: |
+          cd EquityKombatWCS/ios
+          xcodebuild test -workspace EquityKombatWCS.xcworkspace -scheme "equity kombat" -destination "platform=iOS Simulator,name=${{ matrix.device }},OS=latest" | tee result-${{ matrix.device }}.log
+      - name: Upload XCTest Results
+        uses: actions/upload-artifact@v4
+        with:
+          name: xctest-results-${{ matrix.device }}
+          path: EquityKombatWCS/ios/result-${{ matrix.device }}.log
