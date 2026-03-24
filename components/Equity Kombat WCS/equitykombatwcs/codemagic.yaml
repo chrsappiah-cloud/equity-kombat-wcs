@@ -1,0 +1,53 @@
+workflows:
+  e2e:
+    name: Playwright E2E Tests
+    max_build_duration: 30
+    environment:
+      vars:
+        JIRA_BASE_URL: $JIRA_BASE_URL
+        JIRA_USER_EMAIL: $JIRA_USER_EMAIL
+        JIRA_API_TOKEN: $JIRA_API_TOKEN
+        JIRA_PROJECT: YOURPROJECTKEY
+    triggering:
+      events:
+        - schedule
+      branch_patterns:
+        - pattern: '*'
+          include: true
+      schedules:
+        - cron: '0 2 * * *' # daily at 2am UTC
+    scripts:
+      - name: Install dependencies
+        script: |
+          npm ci
+          npx playwright install --with-deps
+      - name: Start static server
+        script: |
+          node EquityKombatWCS/static-server.js &
+          sleep 5
+      - name: Run Playwright E2E tests
+        script: |
+          npx playwright test --reporter=html || echo "E2E tests failed"
+      - name: Upload Playwright HTML Report
+        script: |
+          tar -czf playwright-report.tar.gz playwright-report
+      - name: Create Jira Issue on Failure
+        script: |
+          if [ -f playwright-report/index.html ]; then
+            if grep -q 'failed' playwright-report/index.html; then
+              curl -X POST \
+                -u "$JIRA_USER_EMAIL:$JIRA_API_TOKEN" \
+                -H "Content-Type: application/json" \
+                --data '{
+                  "fields": {
+                    "project": { "key": "'$JIRA_PROJECT'" },
+                    "summary": "E2E test failure in Playwright CI run",
+                    "description": "See attached Playwright report for details.",
+                    "issuetype": { "name": "Bug" }
+                  }
+                }' \
+                "$JIRA_BASE_URL/rest/api/2/issue/"
+            fi
+          fi
+    artifacts:
+      - playwright-report.tar.gz
