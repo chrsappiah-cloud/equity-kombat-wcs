@@ -131,3 +131,10 @@ See `CONTRIBUTING.md` for guidelines.
 ---
 
 This scaffold is ready for rapid development and scaling. Replace placeholders as you build out each app, service, and package.
+
+## Ownership Notice
+
+Copyright (c) 2026 World Class Scholars, led by Dr Christopher Appiah-Thompson.
+All rights reserved.
+
+This repository is proprietary to World Class Scholars unless otherwise stated.

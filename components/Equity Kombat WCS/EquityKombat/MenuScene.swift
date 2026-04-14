@@ -1,3 +1,4 @@
+// Copyright (c) 2026 World Class Scholars, led by Dr Christopher Appiah-Thompson. All rights reserved.
 
 // Example: Loading a texture from a Sprite Atlas
 // let atlas = SKTextureAtlas(named: "fighters")
